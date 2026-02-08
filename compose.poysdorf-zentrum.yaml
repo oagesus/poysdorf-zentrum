@@ -3,6 +3,8 @@ services:
     image: oagesus/poysdorf-zentrum:${TAG:-latest}
     container_name: poysdorf-zentrum
     restart: always
+    networks:
+      - shared
 
 networks:
   shared:
