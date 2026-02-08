@@ -1,0 +1,10 @@
+services:
+  poysdorf-zentrum:
+    image: oagesus/poysdorf-zentrum:${TAG:-latest}
+    container_name: poysdorf-zentrum
+    restart: always
+
+networks:
+  shared:
+    external: true
+    name: shared-network
