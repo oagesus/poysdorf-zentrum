@@ -104,7 +104,7 @@ export default function HomePage() {
                   urbanem Komfort und ländlicher Idylle.
                 </p>
                 <p>
-                  Das weitläufige Grundstück von 450 m² bietet viel Platz für
+                  Das weitläufige Grundstück von 814 m² bietet viel Platz für
                   einen Garten, eine Terrasse oder individuelle
                   Gestaltungsmöglichkeiten. Ob als Familienheim, Ferienhaus oder
                   Investitionsobjekt – dieses Anwesen bietet vielseitige
