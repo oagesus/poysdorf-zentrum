@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Mail, MapPin, Ruler, TreePine, Phone, ChevronDown } from "lucide-react";
+import { Mail, MapPin, Ruler, TreePine, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -47,7 +47,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex items-baseline gap-2">
             <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-white sm:text-5xl">
-              € 50.000
+              € 89.000
             </span>
             <span className="text-white/60">Kaufpreis</span>
           </div>
@@ -66,8 +66,8 @@ export default function HomePage() {
       <section className="border-b border-border bg-muted/30">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-0 divide-x divide-border">
           {[
-            { icon: Ruler, label: "Wohnfläche", value: "120 m²" },
-            { icon: TreePine, label: "Grundstück", value: "450 m²" },
+            { icon: Ruler, label: "Wohnfläche", value: "161,19 m²" },
+            { icon: TreePine, label: "Grundstück", value: "814 m²" },
           ].map((item) => (
             <div
               key={item.label}
@@ -135,7 +135,7 @@ export default function HomePage() {
                 <CardContent className="p-6 text-center">
                   <p className="text-sm text-muted-foreground">Kaufpreis</p>
                   <p className="mt-1 font-[family-name:var(--font-playfair)] text-3xl font-bold text-primary">
-                    € 50.000
+                    € 89.000
                   </p>
                   <a href="#kontakt" className="mt-4 block">
                     <Button className="w-full">Anfrage senden</Button>
@@ -172,7 +172,7 @@ export default function HomePage() {
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                 <div>
                   <p className="font-medium text-foreground">
-                    Hauptstraße 12
+                    Liechtensteinstraße 3
                   </p>
                   <p>2170 Poysdorf, Niederösterreich</p>
                 </div>
@@ -181,7 +181,7 @@ export default function HomePage() {
 
             <div className="overflow-hidden rounded-xl border border-border">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10472.847036842!2d16.625!3d48.6667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d1e1a6b9a1b1d%3A0x400f7d1c69579a0!2sPoysdorf!5e0!3m2!1sde!2sat!4v1700000000000!5m2!1sde!2sat"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3290.1993536117593!2d16.62572649257859!3d48.66907534003588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d2fbebba7dfd1%3A0xb596dc327b26e9fd!2sLiechtensteinstra%C3%9Fe%203%2C%202170%20Poysdorf!5e1!3m2!1sde!2sat!4v1770652406059!5m2!1sde!2sat"
                 width="100%"
                 height="350"
                 style={{ border: 0 }}
@@ -224,16 +224,6 @@ export default function HomePage() {
                 </div>
               </a>
 
-              <a
-                href="tel:+4312345678"
-                className="group flex w-full items-center gap-3 rounded-xl border border-border px-6 py-5 transition-all hover:border-primary/40 hover:bg-primary/5 sm:w-auto"
-              >
-                <Phone className="h-5 w-5 text-primary" />
-                <div className="text-left">
-                  <p className="text-xs text-muted-foreground">Telefon</p>
-                  <p className="text-sm font-medium">+43 123 456 78</p>
-                </div>
-              </a>
             </div>
           </div>
         </div>
