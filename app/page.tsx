@@ -21,11 +21,21 @@ export default function HomePage() {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.playsInline = true;
-      video.play().catch(() => {});
-    }
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.muted = true;
+          video.playsInline = true;
+          video.play().catch(() => {});
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -162,6 +172,8 @@ export default function HomePage() {
                     muted
                     loop
                     playsInline
+                    preload="metadata"
+                    poster="/poysdorf_1.webp"
                     className="absolute inset-0 h-full w-full object-cover"
                   >
                     <source src="/poysdorf_zentrum.mp4" type="video/mp4" />
