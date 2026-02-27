@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Mail, MapPin, Ruler, TreePine, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,10 +8,43 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
+const heroImages = [
+  "/poysdorf_1.webp",
+  "/poysdorf_2.webp",
+  "/poysdorf_3.webp",
+  "/poysdorf_4.webp",
+];
+
 export default function HomePage() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    const startInterval = () => {
+      interval = setInterval(() => {
+        setCurrentImage((prev) => (prev + 1) % heroImages.length);
+      }, 6000);
+    };
+
+    const handleVisibility = () => {
+      clearInterval(interval);
+      if (!document.hidden) {
+        startInterval();
+      }
+    };
+
+    startInterval();
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background font-[family-name:var(--font-lora)]">
-      {/* Floating Contact Button */}
       <div className="fixed top-4 right-6 z-50">
         <a href="#kontakt">
           <Button variant="default" size="lg" className="text-base px-8">
@@ -19,23 +53,24 @@ export default function HomePage() {
         </a>
       </div>
 
-      {/* Hero Section */}
       <section className="relative flex min-h-[85vh] items-end overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=2065&auto=format&fit=crop"
-            alt="Haus Poysdorf Zentrum"
-            fill
-            className="object-cover"
-            priority
-          />
+          {heroImages.map((src, index) => (
+            <Image
+              key={src}
+              src={src}
+              alt={`Haus Poysdorf Zentrum ${index + 1}`}
+              fill
+              className={`object-cover transition-opacity duration-1500 ease-in-out ${
+                index === currentImage ? "opacity-100" : "opacity-0"
+              }`}
+              priority={index === 0}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         </div>
 
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-16">
-          <Badge className="mb-4 bg-primary/90 text-primary-foreground">
-            Zu Verkaufen
-          </Badge>
           <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
             Charmantes Haus mit
             <br />
@@ -62,7 +97,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Key Facts */}
       <section className="border-b border-border bg-muted/30">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-0 divide-x divide-border">
           {[
@@ -85,52 +119,62 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Details Section */}
       <section id="details" className="scroll-mt-20 py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-16 lg:grid-cols-5">
-            {/* Left Column - Description */}
             <div className="lg:col-span-3">
               <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-semibold tracking-tight">
-                Über die Immobilie
+                Grundstück & Bebauung
               </h2>
 
               <div className="mt-3 space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Dieses charmante Haus befindet sich in einer der besten Lagen
-                  von Poysdorf – direkt im Stadtzentrum, umgeben von lokalen
-                  Geschäften, Restaurants und öffentlichen Einrichtungen. Die
-                  ruhige Nachbarschaft bietet eine perfekte Balance zwischen
-                  urbanem Komfort und ländlicher Idylle.
+                  Das Grundstück befindet sich im Bauland-Kerngebiet.
                 </p>
                 <p>
-                  Das weitläufige Grundstück von 814 m² bietet viel Platz für
-                  einen Garten, eine Terrasse oder individuelle
-                  Gestaltungsmöglichkeiten. Ob als Familienheim, Ferienhaus oder
-                  Investitionsobjekt – dieses Anwesen bietet vielseitige
-                  Nutzungsmöglichkeiten.
+                  Der Bebauungsplan legt fest, dass der vordere Bereich der
+                  Liegenschaft in geschlossener Form mit 90% bebaut werden darf.
+                  Die Bauklasse I,II legt die Höhe fest, in diesem Fall ist die
+                  Höhe bis zu 8 Meter zulässig.
                 </p>
+                <p>
+                  Der hintere Bereich der Liegenschaft darf mit 60% bebaut
+                  werden, die Bauklasse ist gleich mit I,II festgelegt, also
+                  ebenso bis zu 8 Metern.
+                </p>
+              </div>
+
+              <div className="mt-8 overflow-hidden rounded-xl border border-border">
+                <div className="relative aspect-[16/10]">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
+                  >
+                    <source src="/poysdorf_zentrum.mp4" type="video/mp4" />
+                  </video>
+                </div>
               </div>
 
             </div>
 
-            {/* Right Column - Image Gallery & Info */}
             <div className="space-y-6 lg:col-span-2">
               <Card className="overflow-hidden py-0 gap-0">
                 <div className="relative aspect-[4/3]">
                   <Image
-                    src="https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop"
-                    alt="Haus Garten"
+                    src="/poysdorf_property.webp"
+                    alt="Bebauungsplan Poysdorf"
                     fill
-                    className="object-cover"
+                    className="object-contain bg-white"
                   />
                 </div>
                 <CardContent className="px-6 py-6 text-center text-sm text-muted-foreground">
-                  Großzügiges Grundstück mit Gartenbereich
+                  Bebauungsplan & Grundstücksgrenzen
                 </CardContent>
               </Card>
 
-              {/* Price Card */}
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6 text-center">
                   <p className="text-sm text-muted-foreground">Kaufpreis</p>
@@ -147,7 +191,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Location Section */}
       <section className="border-t border-border bg-muted/20 py-20">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-semibold tracking-tight">
@@ -195,7 +238,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section
         id="kontakt"
         className="scroll-mt-20 border-t border-border py-20"
@@ -229,7 +271,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t border-border bg-muted/30 py-8">
         <div className="mx-auto max-w-6xl px-6 text-center text-sm text-muted-foreground">
           <p>© 2026 Poysdorf Zentrum. Alle Rechte vorbehalten.</p>
