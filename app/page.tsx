@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Mail, MapPin, Ruler, TreePine, ChevronDown } from "lucide-react";
+import { Mail, MapPin, Ruler, TreePine, ChevronDown, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,7 +17,15 @@ const heroImages = [
 
 export default function HomePage() {
   const [currentImage, setCurrentImage] = useState(0);
+  const [showPlayButton, setShowPlayButton] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play().then(() => setShowPlayButton(false)).catch(() => {});
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -28,7 +36,9 @@ export default function HomePage() {
         if (entry.isIntersecting) {
           video.muted = true;
           video.playsInline = true;
-          video.play().catch(() => {});
+          video.play()
+            .then(() => setShowPlayButton(false))
+            .catch(() => setShowPlayButton(true));
         }
       },
       { threshold: 0.25 }
@@ -178,6 +188,16 @@ export default function HomePage() {
                   >
                     <source src="/poysdorf_zentrum.mp4" type="video/mp4" />
                   </video>
+                  {showPlayButton && (
+                    <button
+                      onClick={handlePlay}
+                      className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/40"
+                    >
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg">
+                        <Play className="h-6 w-6 fill-current text-primary ml-0.5" />
+                      </div>
+                    </button>
+                  )}
                 </div>
               </div>
 
