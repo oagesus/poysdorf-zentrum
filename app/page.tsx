@@ -112,7 +112,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex items-baseline gap-2">
             <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-white sm:text-5xl">
-              € 98.000
+              € 109.000
             </span>
             <span className="text-white/60">Kaufpreis</span>
           </div>
@@ -222,7 +222,7 @@ export default function HomePage() {
                 <CardContent className="p-6 text-center">
                   <p className="text-sm text-muted-foreground">Kaufpreis</p>
                   <p className="mt-1 font-[family-name:var(--font-playfair)] text-3xl font-bold text-primary">
-                    € 98.000
+                    € 109.000
                   </p>
                   <a href="#kontakt" className="mt-4 block">
                     <Button className="w-full">Anfrage senden</Button>
