@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Mail, MapPin, Ruler, TreePine, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,16 @@ const heroImages = [
 
 export default function HomePage() {
   const [currentImage, setCurrentImage] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.playsInline = true;
+      video.play().catch(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -147,6 +157,7 @@ export default function HomePage() {
               <div className="mt-8 overflow-hidden rounded-xl border border-border">
                 <div className="relative aspect-[16/10]">
                   <video
+                    ref={videoRef}
                     autoPlay
                     muted
                     loop
